@@ -11,7 +11,7 @@ class Just < Maybe
   
   def bind(&block)
     value = block.call(@value)
-    warn("Not returning Maybe from #bind is really bad form...") unless value.kind_of?(Maybe)
+    warn("Not returning a Maybe from #bind is really bad form...") unless value.kind_of?(Maybe)
     value
   end
   
