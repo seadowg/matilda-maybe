@@ -10,7 +10,9 @@ class Just < Maybe
   end
   
   def bind(&block)
-    block.call(@value)
+    value = block.call(@value)
+    warn("Not returning Maybe from #bind is really bad form...") unless value.kind_of?(Maybe)
+    value
   end
   
   def ==(object)

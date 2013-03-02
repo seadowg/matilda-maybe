@@ -4,7 +4,7 @@ require_relative 'maybe'
 describe "Just" do
   describe "#bind" do
     it "applys the passed block to its boxed value" do
-      Just.new(5).bind { |val| val * 2 }.must_equal 10
+      Just.new(5).bind { |val| Just.new(val * 2) }.must_equal Just.new(10)
     end
   end
 end
