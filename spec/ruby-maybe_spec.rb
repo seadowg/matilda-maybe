@@ -85,6 +85,12 @@ describe "Maybe" do
       Maybe.new.bind { |val| val }.kind_of?(Maybe).must_equal true
     end
   end
+
+  describe "method lifting" do
+    it "returns Nothing for any method call" do
+      Maybe.new.missing.kind_of?(Maybe).must_equal(true)
+    end
+  end
 end
 
 describe "Integration Specs" do

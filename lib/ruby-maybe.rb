@@ -1,4 +1,12 @@
 class Maybe
+  def method_missing(method_name, *args, &block)
+    if Maybe.method_defined?(method_name)
+      super
+    else
+      Maybe.new
+    end
+  end
+
   def bind(&block)
     Maybe.new
   end
@@ -50,6 +58,7 @@ class Nothing < Maybe
       Nothing.new
     end
   end
+
   def bind
     Nothing.new
   end
