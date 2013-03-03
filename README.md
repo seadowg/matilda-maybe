@@ -6,7 +6,7 @@
 
 ## Description
 
-'Maybe' not 'Maeby'. This is an implementation of the Maybe monad used in
+'Maybe' not 'Maeby'. This is an implementation of the Maybe monad similar to that used
 [Haskell](http://www.haskell.org/haskellwiki/Maybe). Monads provide a
 safe way to create non deterministic programs (for example, when not all
 values are known at compile time). The Maybe monad allows programmers to
