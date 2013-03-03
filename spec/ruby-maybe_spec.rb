@@ -101,7 +101,7 @@ describe "Integration Specs" do
       if (val > 10)
         Nothing.new
       else
-        Just.new(val)
+        Just.new(val) + 1
       end
     }.must_equal(Nothing.new)
   end
