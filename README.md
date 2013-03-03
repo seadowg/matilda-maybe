@@ -1,6 +1,6 @@
 # ruby-maybe
 
-[![Build Status](https://travis-ci.org/soberstadt/uwsp-virtual-tour-server.png?branch=master)](https://travis-ci.org/soberstadt/uwsp-virtual-tour-server)
+[![Build Status](https://travis-ci.org/oetzi/ruby-maybe.png?branch=master)](https://travis-ci.org/oetzi/ruby-maybe)
 
 ![](http://f.cl.ly/items/2o2A3k1N2d3a1b0V3V0T/maybe.png)
 
