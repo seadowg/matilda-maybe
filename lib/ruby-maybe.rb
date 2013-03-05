@@ -1,10 +1,6 @@
 class Maybe
   def method_missing(method_name, *args, &block)
-    if Maybe.method_defined?(method_name)
-      super
-    else
-      Maybe.new
-    end
+    Maybe.new
   end
 
   def bind(&block)
@@ -14,15 +10,12 @@ end
 
 class Just < Maybe
   def method_missing(method_name, *args, &block)
-    if Just.method_defined?(method_name)
-      super
-    else
-      values = args.map { |arg|
-        return Nothing.new if arg == Nothing.new
-        arg.kind_of?(Just) ? arg.value : arg
-      }
-      Just.new(@value.public_send(method_name, *values, &block))
-    end
+    values = args.map { |arg|
+    return Nothing.new if arg == Nothing.new
+      arg.kind_of?(Just) ? arg.value : arg
+    }
+
+    Just.new(@value.public_send(method_name, *values, &block))
   end
 
   def initialize(value)
@@ -52,11 +45,7 @@ end
 
 class Nothing < Maybe
   def method_missing(method_name, *args, &block)
-    if Nothing.method_defined?(method_name)
-      super
-    else
-      Nothing.new
-    end
+    Nothing.new
   end
 
   def bind
