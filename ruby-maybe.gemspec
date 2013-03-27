@@ -6,8 +6,9 @@ Gem::Specification.new do |s|
   s.version = "0.1.1"
   s.platform = Gem::Platform::RUBY
   s.authors = ["Callum Stott"]
-  s.email = ["callum.stott@me.com"]
+  s.email = ["callum@seadowg"]
   s.summary = "Maybe monad implementation for Ruby"
+  s.license = 'MIT'
 
   s.require_paths = ['lib']
   s.files = `git ls-files`.split("\n")
