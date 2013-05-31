@@ -6,6 +6,8 @@
 
 ## Description
 
+### The Basics
+
 'Maybe' not 'Maeby'. This is an implementation of the 'Maybe' or 'Option' monad similar to that used
 [Haskell](http://www.haskell.org/haskellwiki/Maybe). Monads provide a
 safe way to create non deterministic programs (for example, when not all
@@ -53,7 +55,41 @@ without having them throw exceptions or simply return `nil`.
 
 `Maybe` is a very basic monad and at first might not seem that powerful
 but after using it instead of the more verbose control flow it replaces
-I think you might learn to love it.
+you might just learn to love it.
+
+### Method Lifting
+
+Ok so using `bind` to operate on Maybe is all well and good, but what if
+you want to add three Maybe's together:
+
+    x.bind { |x_val|
+      y.bind { |y_val|
+        z.bind { |z_val|
+          Just.new(x + y + z)
+        }
+      }
+    }
+    
+Yeah... I don't think so. In languages like Haskell we can use [Applicative Functors](http://learnyouahaskell.com/functors-applicative-functors-and-monoids)
+to deal with making expressions like the above less verbose. You can go read about them but that's not really important.
+With ruby-maybe methods on the contained object in a Maybe can be lifted to operate on the Maybe:
+
+    Just.new(5) + Just.new(6) # => Just.new(11)
+    Just.new("OMG").downcase # => Just.new("omg")
+    Just.new([1,2]).inject(Just.new(0), :+) # => Just.new(3)
+    
+All operations can be lifted like this and you can mix and match actual values and Maybes in the arguments. This also
+works for Nothing:
+
+    Nothing.new + Just.new(5) # => Nothing.new
+    Just.new(0) * Nothing.new / Just.new(1) # => Nothing.new
+    
+### Extracting Values from a Maybe
+
+Try not to do this. Please. Monads are best used when we play nice and let the Monad look after our values. Of course,
+you're thinking "well at some point I have to take it out to write it out or stick it in a web response on something
+right?". Yes, of course. But its best if these cases have abstractions that can receive monads or are structured as
+Monads themselves (some languages like Haskell include Monads for IO, Web request processing [etc](http://learnyouahaskell.com/a-fistful-of-monads)).
 
 ## Installation
 
