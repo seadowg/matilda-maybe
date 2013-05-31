@@ -1,6 +1,6 @@
 # ruby-maybe
 
-[![Build Status](https://travis-ci.org/oetzi/ruby-maybe.png?branch=master)](https://travis-ci.org/oetzi/ruby-maybe)
+[![Build Status](https://travis-ci.org/seadowg/ruby-maybe.png?branch=master)](https://travis-ci.org/seadowg/ruby-maybe)
 
 ![](http://f.cl.ly/items/2o2A3k1N2d3a1b0V3V0T/maybe.png)
 
@@ -69,7 +69,7 @@ you want to add three Maybe's together:
         }
       }
     }
-    
+
 Yeah... I don't think so. In languages like Haskell we can use [Applicative Functors](http://learnyouahaskell.com/functors-applicative-functors-and-monoids)
 to deal with making expressions like the above less verbose. You can go read about them but that's not really important.
 With ruby-maybe methods on the contained object in a Maybe can be lifted to operate on the Maybe:
@@ -77,13 +77,13 @@ With ruby-maybe methods on the contained object in a Maybe can be lifted to oper
     Just.new(5) + Just.new(6) # => Just.new(11)
     Just.new("OMG").downcase # => Just.new("omg")
     Just.new([1,2]).inject(Just.new(0), :+) # => Just.new(3)
-    
+
 All operations can be lifted like this and you can mix and match actual values and Maybes in the arguments. This also
 works for Nothing:
 
     Nothing.new + Just.new(5) # => Nothing.new
     Just.new(0) * Nothing.new / Just.new(1) # => Nothing.new
-    
+
 ### Extracting Values from a Maybe
 
 Try not to do this. Please. Monads are best used when we play nice and let the Monad look after our values. Of course,
