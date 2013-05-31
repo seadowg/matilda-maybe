@@ -4,7 +4,17 @@
 
 ![](http://f.cl.ly/items/2o2A3k1N2d3a1b0V3V0T/maybe.png)
 
-## Description
+## Installation
+
+Either include in your Gemfile:
+
+    gem 'ruby-maybe'
+
+Or, install for your system:
+
+    > gem install ruby-maybe
+
+## Usage
 
 ### The Basics
 
@@ -90,13 +100,3 @@ Try not to do this. Please. Monads are best used when we play nice and let the M
 you're thinking "well at some point I have to take it out to write it out or stick it in a web response on something
 right?". Yes, of course. But its best if these cases have abstractions that can receive monads or are structured as
 Monads themselves (some languages like Haskell include Monads for IO, Web request processing [etc](http://learnyouahaskell.com/a-fistful-of-monads)).
-
-## Installation
-
-Either include in your Gemfile:
-
-    gem 'ruby-maybe'
-
-Or, install for your system:
-
-    > gem install ruby-maybe
