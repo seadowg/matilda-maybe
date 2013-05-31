@@ -96,7 +96,7 @@ works for Nothing:
 
 ### Extracting Values from a Maybe
 
-Try not to do this. Please. Monads are best used when we play nice and let the Monad look after our values. Of course,
+Try not to do this. Please. Monads are best used when we play nice and let the monad look after our values. Of course,
 you're thinking "well at some point I have to take it out to write it out or stick it in a web response on something
 right?". Yes, of course. But its best if these cases have abstractions that can receive monads or are structured as
-Monads themselves (some languages like Haskell include Monads for IO, Web request processing [etc](http://learnyouahaskell.com/a-fistful-of-monads)).
+Monads themselves (some languages like Haskell include monads for IO, Web request processing [etc](http://learnyouahaskell.com/a-fistful-of-monads)).
