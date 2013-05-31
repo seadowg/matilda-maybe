@@ -41,6 +41,12 @@ describe "Just" do
       count.must_equal(10)
     end
   end
+
+  describe "#_extract!" do
+    it "returns the contained value" do
+      Just.new(5)._extract!.must_equal(5)
+    end
+  end
 end
 
 describe "Nothing" do
@@ -71,24 +77,12 @@ describe "Nothing" do
       Nothing.new.missing.must_equal(Nothing.new)
     end
   end
-end
 
-describe "Maybe" do
-  describe "#bind" do
-    it "does not execute the passed block" do
-      executed = false
-      Maybe.new.bind { |val| executed = true }
-      executed.must_equal false
-    end
-
-    it "returns a Maybe" do
-      Maybe.new.bind { |val| val }.kind_of?(Maybe).must_equal true
-    end
-  end
-
-  describe "method lifting" do
-    it "returns Maybe for any method call" do
-      Maybe.new.missing.kind_of?(Maybe).must_equal(true)
+  describe "#_extract!" do
+    it "raises an exception" do
+      assert_raises(Nothing::AttemptedExtract) {
+        Nothing.new._extract!
+      }
     end
   end
 end

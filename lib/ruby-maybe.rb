@@ -1,17 +1,10 @@
 class Maybe
-  def method_missing(method_name, *args, &block)
-    Maybe.new
-  end
-
-  def bind(&block)
-    Maybe.new
-  end
 end
 
 class Just < Maybe
   def method_missing(method_name, *args, &block)
     values = args.map { |arg|
-    return Nothing.new if arg == Nothing.new
+      return Nothing.new if arg == Nothing.new
       arg.kind_of?(Just) ? arg.value : arg
     }
 
@@ -23,9 +16,9 @@ class Just < Maybe
   end
 
   def bind(&block)
-    value = block.call(@value)
-    warn("Not returning a Maybe from #bind is really bad form...") unless value.kind_of?(Maybe)
-    value
+    computed = block.call(@value)
+    warn("Not returning a Maybe from #bind is really bad form...") unless computed.kind_of?(Maybe)
+    computed
   end
 
   def ==(object)
@@ -34,6 +27,10 @@ class Just < Maybe
     else
       false
     end
+  end
+
+  def _extract!
+    value
   end
 
   protected
@@ -57,6 +54,16 @@ class Nothing < Maybe
       true
     else
       false
+    end
+  end
+
+  def _extract!
+    raise AttemptedExtract.new
+  end
+
+  class AttemptedExtract < Exception
+    def initialize
+      super("Attempted to extract value from Nothing")
     end
   end
 end
