@@ -1,10 +1,37 @@
 require 'minitest/autorun'
 require 'ruby-maybe'
 
+describe "Maybe" do
+  describe "#from" do
+    it "returns Nothing if passed nil" do
+      Maybe.from(nil).must_equal Nothing.new
+    end
+  end
+end
+
+
 describe "Just" do
   describe "#bind" do
     it "applys the passed block to its boxed value" do
       Just.new(5).bind { |val| Just.new(val * 2) }.must_equal Just.new(10)
+    end
+  end
+
+  describe "#mplus" do
+    it "ignores arg and returns self" do
+      (Maybe.from(5).mplus{Maybe.from(10)}).must_equal Just.new(5)
+    end
+  end
+
+  describe "#or_else" do
+    it "ignores arg and returns self" do
+      (Maybe.from(5).or_else{Maybe.from(10)}).must_equal Just.new(5)
+    end
+  end
+
+  describe "#get_or_else" do
+    it "ignores arg and returns value" do
+      (Maybe.from(5).get_or_else{10}).must_equal 5
     end
   end
 
@@ -59,6 +86,32 @@ describe "Nothing" do
 
     it "returns a Nothing" do
       Nothing.new.bind { |val| val }.kind_of?(Nothing).must_equal true
+    end
+  end
+
+  describe "#mplus" do
+    it "evaluates arg, returning result" do
+      (Nothing.new.mplus{Maybe.from(5)}).must_equal Just.new(5)
+    end
+
+    it "chain mplus calls, returning last value" do
+      (Nothing.new.mplus{Nothing.new.mplus{Just.new(10)}}).must_equal Just.new(10)
+    end
+  end
+
+  describe "#or_else" do
+    it "evaluates arg, returning result" do
+      (Nothing.new.or_else{Maybe.from(5)}).must_equal Just.new(5)
+    end
+
+    it "chain or_else calls, returning last value" do
+      (Nothing.new.or_else{Nothing.new.or_else{Just.new(10)}}).must_equal Just.new(10)
+    end
+  end
+
+  describe "#get_or_else" do
+    it "evaluates arg, returning result" do
+      (Nothing.new.get_or_else{5}).must_equal 5
     end
   end
 
