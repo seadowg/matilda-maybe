@@ -1,10 +1,34 @@
 require 'spec_helper'
 require 'ruby-maybe'
 
+describe "Maybe" do
+  describe "#from" do
+    it "returns Nothing if passed nil" do
+      Maybe.from(nil).must_equal Nothing.new
+    end
+    it "returns Just if passed non-nil value" do
+      Maybe.from(11).must_equal Just.new(11)
+    end
+  end
+end
+
+
 describe "Just" do
   describe "#bind" do
     it "applys the passed block to its boxed value" do
       Just.new(5).bind { |val| Just.new(val * 2) }.must_equal Just.new(10)
+    end
+  end
+
+  describe "#or" do
+    it "ignores arg and returns self" do
+      (Maybe.from(5).or{Maybe.from(10)}).must_equal Just.new(5)
+    end
+  end
+
+  describe "#get" do
+    it "ignores arg and returns value" do
+      (Maybe.from(5).get{10}).must_equal 5
     end
   end
 
@@ -59,6 +83,22 @@ describe "Nothing" do
 
     it "returns a Nothing" do
       Nothing.new.bind { |val| val }.kind_of?(Nothing).must_equal true
+    end
+  end
+
+  describe "#or" do
+    it "evaluates arg, returning result" do
+      (Nothing.new.or{Maybe.from(5)}).must_equal Just.new(5)
+    end
+
+    it "chain or calls, returning last value" do
+      (Nothing.new.or{Nothing.new.or{Just.new(10)}}).must_equal Just.new(10)
+    end
+  end
+
+  describe "#get" do
+    it "evaluates arg, returning result" do
+      (Nothing.new.get{5}).must_equal 5
     end
   end
 
