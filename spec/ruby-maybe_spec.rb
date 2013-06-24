@@ -6,6 +6,9 @@ describe "Maybe" do
     it "returns Nothing if passed nil" do
       Maybe.from(nil).must_equal Nothing.new
     end
+    it "returns Just if passed non-nil value" do
+      Maybe.from(11).must_equal Just.new(11)
+    end
   end
 end
 
@@ -17,21 +20,15 @@ describe "Just" do
     end
   end
 
-  describe "#mplus" do
+  describe "#or" do
     it "ignores arg and returns self" do
-      (Maybe.from(5).mplus{Maybe.from(10)}).must_equal Just.new(5)
+      (Maybe.from(5).or{Maybe.from(10)}).must_equal Just.new(5)
     end
   end
 
-  describe "#or_else" do
-    it "ignores arg and returns self" do
-      (Maybe.from(5).or_else{Maybe.from(10)}).must_equal Just.new(5)
-    end
-  end
-
-  describe "#get_or_else" do
+  describe "#get" do
     it "ignores arg and returns value" do
-      (Maybe.from(5).get_or_else{10}).must_equal 5
+      (Maybe.from(5).get{10}).must_equal 5
     end
   end
 
@@ -89,29 +86,19 @@ describe "Nothing" do
     end
   end
 
-  describe "#mplus" do
+  describe "#or" do
     it "evaluates arg, returning result" do
-      (Nothing.new.mplus{Maybe.from(5)}).must_equal Just.new(5)
+      (Nothing.new.or{Maybe.from(5)}).must_equal Just.new(5)
     end
 
-    it "chain mplus calls, returning last value" do
-      (Nothing.new.mplus{Nothing.new.mplus{Just.new(10)}}).must_equal Just.new(10)
+    it "chain or calls, returning last value" do
+      (Nothing.new.or{Nothing.new.or{Just.new(10)}}).must_equal Just.new(10)
     end
   end
 
-  describe "#or_else" do
+  describe "#get" do
     it "evaluates arg, returning result" do
-      (Nothing.new.or_else{Maybe.from(5)}).must_equal Just.new(5)
-    end
-
-    it "chain or_else calls, returning last value" do
-      (Nothing.new.or_else{Nothing.new.or_else{Just.new(10)}}).must_equal Just.new(10)
-    end
-  end
-
-  describe "#get_or_else" do
-    it "evaluates arg, returning result" do
-      (Nothing.new.get_or_else{5}).must_equal 5
+      (Nothing.new.get{5}).must_equal 5
     end
   end
 

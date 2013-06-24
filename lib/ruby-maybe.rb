@@ -28,13 +28,11 @@ class Just < Maybe
     computed
   end
 
-  def mplus(&block)
+  def or(&block)
     self
   end
 
-  alias_method :or_else, :mplus
-
-  def get_or_else(&block)
+  def get(&block)
     @value
   end
 
@@ -67,13 +65,11 @@ class Nothing < Maybe
     Nothing.new
   end
 
-  def mplus(&block)
+  def or(&block)
     block.call
   end
 
-  alias_method :or_else, :mplus
-
-  def get_or_else(&block)
+  def get(&block)
     block.call
   end
 
