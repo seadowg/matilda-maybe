@@ -24,13 +24,13 @@ describe "Just" do
 
   describe "#or" do
     it "ignores arg and returns self" do
-      (Maybe.from(5).or{Maybe.from(10)}).must_equal Just.new(5)
+      (Just.new(5).or { 0 }).must_equal Just.new(5)
     end
   end
 
   describe "#get" do
     it "ignores arg and returns value" do
-      (Maybe.from(5).get{10}).must_equal 5
+      (Just.new(5).get { 0 }).must_equal 5
     end
   end
 
@@ -90,17 +90,17 @@ describe "Nothing" do
 
   describe "#or" do
     it "evaluates arg, returning result" do
-      (Nothing.new.or{Maybe.from(5)}).must_equal Just.new(5)
+      (Nothing.new.or { Just.new(5) }).must_equal Just.new(5)
     end
 
     it "chain or calls, returning last value" do
-      (Nothing.new.or{Nothing.new.or{Just.new(10)}}).must_equal Just.new(10)
+      (Nothing.new.or { Nothing.new.or { Just.new(10) } }).must_equal Just.new(10)
     end
   end
 
   describe "#get" do
     it "evaluates arg, returning result" do
-      (Nothing.new.get{5}).must_equal 5
+      (Nothing.new.get { 5 }).must_equal 5
     end
   end
 
