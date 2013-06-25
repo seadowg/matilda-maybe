@@ -1,7 +1,7 @@
 class Maybe
-  def self.from(x)
-    if x
-      Just.new(x)
+  def self.from(value)
+    if !value.nil?
+      Just.new(value)
     else
       Nothing.new
     end
@@ -35,7 +35,6 @@ class Just < Maybe
   def get(&block)
     @value
   end
-
 
   def ==(object)
     if object.class == Just
