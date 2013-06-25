@@ -1,4 +1,11 @@
 class Maybe
+  def self.from(x)
+    if x
+      Just.new(x)
+    else
+      Nothing.new
+    end
+  end
 end
 
 class Just < Maybe
@@ -20,6 +27,15 @@ class Just < Maybe
     warn("Not returning a Maybe from #bind is really bad form...") unless computed.kind_of?(Maybe)
     computed
   end
+
+  def or(&block)
+    self
+  end
+
+  def get(&block)
+    @value
+  end
+
 
   def ==(object)
     if object.class == Just
@@ -47,6 +63,14 @@ class Nothing < Maybe
 
   def bind
     Nothing.new
+  end
+
+  def or(&block)
+    block.call
+  end
+
+  def get(&block)
+    block.call
   end
 
   def ==(object)
