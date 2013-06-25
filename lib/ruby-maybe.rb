@@ -44,10 +44,6 @@ class Just < Maybe
     end
   end
 
-  def _extract!
-    value
-  end
-
   protected
 
   def value
@@ -77,16 +73,6 @@ class Nothing < Maybe
       true
     else
       false
-    end
-  end
-
-  def _extract!
-    raise AttemptedExtract.new
-  end
-
-  class AttemptedExtract < Exception
-    def initialize
-      super("Attempted to extract value from Nothing")
     end
   end
 end

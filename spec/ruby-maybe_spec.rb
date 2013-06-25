@@ -67,12 +67,6 @@ describe "Just" do
       count.must_equal(10)
     end
   end
-
-  describe "#_extract!" do
-    it "returns the contained value" do
-      Just.new(5)._extract!.must_equal(5)
-    end
-  end
 end
 
 describe "Nothing" do
@@ -117,14 +111,6 @@ describe "Nothing" do
   describe "method lifting" do
     it "returns Nothing for any method call" do
       Nothing.new.missing.must_equal(Nothing.new)
-    end
-  end
-
-  describe "#_extract!" do
-    it "raises an exception" do
-      assert_raises(Nothing::AttemptedExtract) {
-        Nothing.new._extract!
-      }
     end
   end
 end
