@@ -14,6 +14,12 @@ describe "Nothing" do
     end
   end
 
+  describe "#map" do
+    it "returns Nothing" do
+      Nothing.new.map { |val| val }.must_equal Nothing.new
+    end
+  end
+
   describe "#or" do
     it "evaluates arg, returning result" do
       (Nothing.new.or { Just.new(5) }).must_equal Just.new(5)

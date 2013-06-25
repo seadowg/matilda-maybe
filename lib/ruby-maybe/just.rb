@@ -18,6 +18,10 @@ class Just < Maybe
     computed
   end
 
+  def map(&block)
+    Just.new(block.call(@value))
+  end
+
   def or(&block)
     self
   end

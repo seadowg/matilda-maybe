@@ -7,6 +7,10 @@ class Nothing < Maybe
     Nothing.new
   end
 
+  def map
+    Nothing.new
+  end
+
   def or(&block)
     block.call
   end
