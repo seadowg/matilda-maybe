@@ -23,6 +23,7 @@ describe "Nothing" do
   describe "#or" do
     it "evaluates arg, returning result" do
       (Nothing.new.or { Just.new(5) }).must_equal Just.new(5)
+      Nothing.new.or(Just.new(5)).must_equal Just.new(5)
     end
 
     it "chain or calls, returning last value" do
@@ -33,6 +34,7 @@ describe "Nothing" do
   describe "#get" do
     it "evaluates arg, returning result" do
       (Nothing.new.get { 5 }).must_equal 5
+      Nothing.new.get(5).must_equal 5
     end
   end
 

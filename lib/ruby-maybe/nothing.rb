@@ -11,12 +11,20 @@ class Nothing < Maybe
     Nothing.new
   end
 
-  def or(&block)
-    block.call
+  def or(*args, &block)
+    if args.empty?
+      block.call
+    else
+      args.first
+    end
   end
 
-  def get(&block)
-    block.call
+  def get(*args, &block)
+    if args.empty?
+      block.call
+    else
+      args.first
+    end
   end
 
   def ==(object)

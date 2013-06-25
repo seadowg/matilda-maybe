@@ -15,8 +15,9 @@ describe "Just" do
   end
 
   describe "#get" do
-    it "ignores arg and returns value" do
+    it "ignores the arguments and returns the value" do
       (Just.new(5).get { 0 }).must_equal 5
+      Just.new(5).get(0).must_equal 5
     end
   end
 

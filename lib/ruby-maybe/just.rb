@@ -22,11 +22,11 @@ class Just < Maybe
     Just.new(block.call(@value))
   end
 
-  def or(&block)
+  def or(*args, &block)
     self
   end
 
-  def get(&block)
+  def get(*args, &block)
     @value
   end
 
