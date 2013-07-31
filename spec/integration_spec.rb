@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'ruby-maybe'
+require 'matilda-maybe'
 
 describe "Integration Specs" do
   it "works as expected" do

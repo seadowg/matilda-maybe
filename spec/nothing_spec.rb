@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'ruby-maybe'
+require 'matilda-maybe'
 
 describe "Nothing" do
   describe "#bind" do
