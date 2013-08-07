@@ -1,6 +1,6 @@
-# ruby-maybe
+# matilda-maybe
 
-[![Build Status](https://travis-ci.org/seadowg/ruby-maybe.png?branch=master)](https://travis-ci.org/seadowg/ruby-maybe)
+[![Build Status](https://travis-ci.org/seadowg/matilda-maybe.png?branch=master)](https://travis-ci.org/seadowg/matilda-maybe)
 
 ![](http://f.cl.ly/items/2o2A3k1N2d3a1b0V3V0T/maybe.png)
 
@@ -8,17 +8,17 @@
 
 Either include in your Gemfile:
 
-    gem 'ruby-maybe'
+    gem 'matilda-maybe'
 
 Or, install for your system:
 
-    > gem install ruby-maybe
+    > gem install matilda-maybe
 
 ## Usage
 
 ### The Basics
 
-'Maybe' not 'Maeby'. This is an implementation of the 'Maybe' or 'Option' monad similar to that used
+This is an implementation of the 'Maybe' or 'Option' monad similar to that used
 [Haskell](http://www.haskell.org/haskellwiki/Maybe). Monads provide a
 safe way to create non deterministic programs (for example, when not all
 values are known at compile time). The Maybe monad allows programmers to
